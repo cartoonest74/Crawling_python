@@ -1,6 +1,6 @@
 from openpyxl import Workbook
 from Kpop_artist import *
-import pymysql
+import pymysql 
 
 def write_excel(file_name, sheet_title, arr_column, data):
     write_wb = Workbook()
@@ -44,7 +44,7 @@ def db_connect():
         password='@gksrudwnGOD74',
         host='127.0.0.1',
         db='shopdb',
-        charset='utf8'
+        charset='utf8mb4'
     )
     return cart_db
 

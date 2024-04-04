@@ -28,6 +28,7 @@ def img_down(arr_img_url, arr_dirPath):
     springBoot_path =[]
     springBoot_path = save_path.strip().split("market_crolling")
 
+    # 이미지 확장자명 정규식
     extension_reg = re.compile(r'JPG|PNG|JPEG',re.IGNORECASE)
     for url in arr_img_url:
         # file_extension_index = url.rfind(".") +1
@@ -36,11 +37,15 @@ def img_down(arr_img_url, arr_dirPath):
         # file_extension = url[file_extension_index:]
         # if last_extension_check != -1:
         #     file_extension = url[file_extension_index:last_extension_check]
+        # 정규식에 해당하는 확장자명 그룹화해서 가져오기
         file_extension = extension_reg.search(url).group()
         file_name = f'{uuid.uuid1()}.{file_extension}'
         full_path = f'{save_path}/{file_name}'
 
         sql_imgSave_path = f'{springBoot_path[1]}/{file_name}'
+
+        # base64로 암호화되어 저장된 이미지 파일은 디코딩해서 이미지 저장하기
+        # 그렇지 않은 이미지 주소는 full_path 변수에 담은 경로로 저장
         if url.find("base64") == -1:
             request_get = requests.get(url)
             with open(full_path,'wb') as photo:
