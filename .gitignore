@@ -1,4 +1,5 @@
 python/sql.py
+python/multithred_sql.py
 python/refer_weverse/
 img/
 *.sql
